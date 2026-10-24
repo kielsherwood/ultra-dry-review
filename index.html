@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Review Ultra Dry Roofing</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--navy:#033349;--blue:#29ABE2;--cream:#F3EEE2}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--cream);color:#2b2b2b}
+header{background:var(--navy);padding:18px;text-align:center}header img{max-width:180px;height:auto}
+main{max-width:480px;margin:0 auto;padding:20px}
+h1{color:var(--navy);font-size:1.5rem;margin:.2em 0 .3em;text-align:center}p.sub{text-align:center;margin-top:0}
+.stars{display:flex;justify-content:center;gap:6px;margin:16px 0}
+.stars button{font-size:2.6rem;background:none;border:0;color:#c9c3b5;cursor:pointer;padding:0 2px;line-height:1}
+.stars button.on{color:#f5b301}
+textarea,input{width:100%;font:inherit;padding:12px;border:1px solid #bbb;border-radius:10px;margin:6px 0;background:#fff}
+textarea{min-height:120px}
+.btn{display:block;width:100%;padding:16px;border:0;border-radius:12px;font-size:1.1rem;font-weight:700;color:#fff;background:var(--blue);cursor:pointer;margin-top:12px;text-align:center;text-decoration:none}
+.btn.navy{background:var(--navy)}
+.hidden{display:none}.small{display:block;text-align:center;margin-top:14px;color:var(--navy);font-size:.95rem}
+.msg{background:#e3f5fc;border-left:4px solid var(--blue);padding:12px;border-radius:8px;margin-top:12px;font-weight:600}
+footer{text-align:center;font-size:.8rem;color:#666;padding:20px}
+</style></head><body>
+<header><img src="logo.png" alt="Ultra Dry Roofing"></header>
+<main>
+<h1>How did we do?</h1>
+<p class="sub">Tap a rating and tell us about your project.</p>
+<div class="stars" id="stars" role="radiogroup" aria-label="Rating"></div>
+<textarea id="review" placeholder="Your review (what went well, who helped you, anything we can improve)"></textarea>
+
+<div id="five" class="hidden">
+  <button class="btn" id="postGoogle">Post my review on Google</button>
+  <div id="copied" class="msg hidden">Copied! Paste it on Google.</div>
+</div>
+
+<form id="low" class="hidden" action="https://formsubmit.co/kiel@ultradryroofing.com" method="POST">
+  <p><strong>Thank you for being honest.</strong> Kiel, the owner, reads every one of these personally.</p>
+  <input type="hidden" name="_subject" value="Customer feedback from review page">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+  <input type="hidden" name="_next" id="next">
+  <input type="hidden" name="rating" id="ratingField">
+  <input type="hidden" name="comment" id="commentField">
+  <input name="name" placeholder="Your name" autocomplete="name">
+  <input name="phone" type="tel" placeholder="Phone" autocomplete="tel">
+  <input name="job_address" placeholder="Job address" autocomplete="street-address">
+  <button class="btn navy" type="submit">Send this straight to Kiel so we can make it right</button>
+</form>
+<a id="googleLink" class="small hidden" href="#" target="_blank" rel="noopener">Post on Google instead</a>
+</main>
+<footer>Ultra Dry Roofing · 6767 E Washington St, Ste 12, Indianapolis, IN · (317) 449-7663</footer>
+<script>
+// Verified Google Place ID for Ultra Dry Roofing (6767 E Washington St Ste 12, Indianapolis)
+const GOOGLE_REVIEW_URL="https://search.google.com/local/writereview?placeid=ChIJScadWA6BkSIRWBfDG-dek0Q";
+let rating=0;const s=document.getElementById('stars');
+for(let i=1;i<=5;i++){const b=document.createElement('button');b.type='button';b.textContent='★';b.setAttribute('aria-label',i+' star'+(i>1?'s':''));b.onclick=()=>setR(i);s.appendChild(b);}
+const gl=document.getElementById('googleLink');gl.href=GOOGLE_REVIEW_URL;
+document.getElementById('next').value=location.href.replace(/[^/]*$/,'')+'thanks.html';
+function setR(n){rating=n;[...s.children].forEach((b,i)=>b.classList.toggle('on',i<n));
+ document.getElementById('five').classList.toggle('hidden',n!==5);
+ document.getElementById('low').classList.toggle('hidden',n===5);
+ gl.classList.toggle('hidden',n===5);}
+function copy(t){if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t).catch(fb);fb();
+ function fb(){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy')}catch(e){}a.remove();}}
+document.getElementById('postGoogle').onclick=()=>{const t=document.getElementById('review').value.trim();
+ if(t)copy(t);document.getElementById('copied').classList.remove('hidden');
+ setTimeout(()=>window.open(GOOGLE_REVIEW_URL,'_blank')||(location.href=GOOGLE_REVIEW_URL),700);};
+document.getElementById('low').onsubmit=()=>{document.getElementById('ratingField').value=rating+' / 5';
+ document.getElementById('commentField').value=document.getElementById('review').value;};
+</script></body></html>
